@@ -4,10 +4,10 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = () => {
+const LoginPageNew = () => {
     const navigate = useNavigate();
     
-    const [email, setEmail] = useState("");
+    const [username, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -15,8 +15,9 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const { data } = await axios.post('/api/v1/auth/login', {email, password });
-            toast.success('User Registered Successfully');
+            const { data } = await axios.post('http://localhost:8083/login', { username, password });
+            console.log('when login is called : ',data,username,password);
+            toast.success('User Login Successfully');
 
             navigate('/');
         } catch (err) {
@@ -46,8 +47,8 @@ const Login = () => {
                     fullWidth
                     margin="normal"
                     label="Email"
-                    name="email"
-                    type="email"
+                    name="username"
+                    type="txt"
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
@@ -78,6 +79,6 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginPageNew;
 
 

@@ -8,7 +8,6 @@ import axios from 'axios';
 const RegisterPageNew = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -16,11 +15,15 @@ const RegisterPageNew = () => {
         e.preventDefault();
 
         try {
-            const { data } = await axios.post('/api/v1/auth/register', { username, email, password });
+            {console.log("username and password : in client side :",username,password)}
+            console.log('registration post method is about to calling .. ');
+            const { data } = await axios.post('http://localhost:8083/register', { username, password });
             console.log("Login succefhllh: ",data);
             toast.success('User Registered Successfully');
             navigate('/');
         } catch (err) {
+
+            console.log("error is present : ");
             if (err.response && err.response.data && err.response.data.error) {
                 setError(err.response.data.error);
             } else if (err.message) {
@@ -52,15 +55,6 @@ const RegisterPageNew = () => {
                 <TextField
                     fullWidth
                     margin="normal"
-                    label="Email"
-                    name="email"
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <TextField
-                    fullWidth
-                    margin="normal"
                     label="Password"
                     name="password"
                     type="password"
@@ -77,6 +71,7 @@ const RegisterPageNew = () => {
                         padding: '12px 0',
                         fontSize: '16px',
                     }}
+                 
                 >
                     Sign Up
                 </Button>
