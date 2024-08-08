@@ -72,7 +72,7 @@ const Navbar = () => {
             Sign Up
           </NavLink>
           <NavLink to="/login" style={{ padding: "0 1rem" }}>
-            Sign In
+            Sign In.
           </NavLink>
         </>
       )}
